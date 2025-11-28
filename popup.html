@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <title>Proxy Switcher</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>🚀 Super Proxy <span style="font-size:12px;color:#888;font-weight:normal">Pro</span></h2>
+    </div>
+    
+    <div class="tabs">
+      <button id="tab-switch" class="active">切换模式</button>
+      <button id="tab-manage">配置管理</button>
+    </div>
+
+    <div id="view-switch" class="view active">
+      <div class="status-box">
+        <p>当前模式: <span id="current-status" class="badge">直连</span></p>
+        <p id="current-detail" class="detail-text">不使用代理</p>
+        
+        <div class="ip-box">
+          <span id="ip-indicator">●</span> 
+          当前 IP: <span id="ip-address">检测中...</span>
+          <span id="ip-country" class="flag-icon"></span>
+          <button id="btn-refresh-ip" title="刷新IP">↻</button>
+        </div>
+      </div>
+
+      <div class="mode-buttons">
+        <button class="mode-btn direct" data-type="direct">🚫 直连模式</button>
+        <button class="mode-btn system" data-type="system">💻 系统代理</button>
+      </div>
+
+      <div class="list-header">我的节点列表</div>
+      <div id="proxy-list" class="proxy-list">
+        </div>
+    </div>
+
+    <div id="view-manage" class="view">
+      <form id="proxy-form">
+        <input type="hidden" id="p-id" value="">
+
+        <div class="form-group">
+          <label>备注名称</label>
+          <input type="text" id="p-name" placeholder="例如: 香港节点 01" required>
+        </div>
+        
+        <div class="form-group">
+          <label>协议</label>
+          <select id="p-scheme">
+            <option value="http">HTTP</option>
+            <option value="https">HTTPS</option>
+            <option value="socks4">SOCKS4</option>
+            <option value="socks5">SOCKS5</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="flex: 2;">
+            <label>主机 (Host)</label>
+            <input type="text" id="p-host" placeholder="127.0.0.1" required>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>端口 (Port)</label>
+            <input type="number" id="p-port" placeholder="7890" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>认证 (可选)</label>
+          <div class="form-row">
+            <input type="text" id="p-user" placeholder="用户名">
+            <input type="password" id="p-pass" placeholder="密码">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>排除列表 (Bypass List)</label>
+          <textarea id="p-bypass" rows="2" placeholder="localhost, 127.0.0.1, <local>"></textarea>
+        </div>
+
+        <button type="submit" class="save-btn" id="btn-save">保存配置</button>
+        <button type="button" class="cancel-btn hidden" id="btn-cancel">取消编辑</button>
+      </form>
+
+      <hr>
+      <h3>已保存配置</h3>
+      <ul id="saved-list"></ul>
+
+      <hr>
+      <h3>数据备份</h3>
+      <div class="form-row">
+        <button id="btn-export" class="mode-btn">📤 导出配置</button>
+        <button id="btn-import" class="mode-btn">📥 导入配置</button>
+        <input type="file" id="file-input" style="display:none" accept=".json">
+      </div>
+      <div style="height: 20px;"></div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
